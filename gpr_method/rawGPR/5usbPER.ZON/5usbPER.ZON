@@ -1,0 +1,9 @@
+[Zona]
+ScansioneT=1
+ScansioneL=0
+MarkerStep=1
+Array_l_coord=0
+Array_t_coord=0
+Array_Step_l_coord=0
+Array_Step_t_coord=0
+Curr_Value=1
