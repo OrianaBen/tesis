@@ -84,8 +84,11 @@ x5 <- gainSEC(
   track = TRUE
 )
 
+#trace amplitude envelopes (with Hilbert transform)
+png("traceamplitudeenvs.png")
 plot(traceStat(x4_env), log = "y", col = "red", lwd = 2)
 lines(traceStat(envelope(x5)), log = "y", col = "green", lwd = 2)
+dev.off()
 
 png("gainapplied.png")
 plot(x5, col = palGPR("gray"))
