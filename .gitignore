@@ -6,3 +6,5 @@ venv
 *.data
 *.png
 electric_methods/data/position_data.xlsx
+electric_methods/data/electric_data.xlsx
+electric_methods/data/position_xz.xlsx
