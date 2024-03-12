@@ -7,7 +7,7 @@ electrode_sep = df.at[1,'B'] - df.at[1,'A']
 df[column_names]=df[column_names].apply(lambda x: (x/5)+1).astype(int)
 df.rename(columns={'A':'a','B':'b','M':'m','N':'n','ΔV':'u','ρ̥':'rhoa','SD':'sd','I':'i','SP':'sp'},inplace=True)
 
-topo = pd.read_excel('data\position_data.xlsx',sheet_name=2)
+topo = pd.read_excel('data\position_xz.xlsx',sheet_name=2)
 topo['x']=topo['x'].apply(lambda x: (((x%(x+1))*electrode_sep)-electrode_sep)).astype(float)
 
 n = len(topo)
