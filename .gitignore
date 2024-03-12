@@ -5,3 +5,4 @@ venv
 *.csv
 *.data
 *.png
+electric_methods/data/position_data.xlsx
