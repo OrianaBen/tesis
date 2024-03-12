@@ -4,8 +4,9 @@ import pandas as pd
 for i in range(4):
 
     #leer datos electricos como DataFrame
-    #y guardar nombres de las columnas en una variable
-    df = pd.read_excel('data\electric_data.xlsx',sheet_name=i,index_col=None)
+    #y guardar cantidad de datos en una variable
+    df = pd.read_excel('data\electric_data _modified.xlsx',sheet_name=i,index_col=None)
+    data_number = len(df)
 
     #filtrar datos para que no se muestre el índice
     #ni las observaciones
@@ -13,6 +14,7 @@ for i in range(4):
     filter = df.filter(labels_todrop)
     df.drop(filter, inplace=True, axis=1)
 
+    #guardar nombres de columnas de interés en una lista
     column_names = ['A','B','N','M']
 
     #definir el valor de separación de electrodos,
@@ -29,23 +31,17 @@ for i in range(4):
     topo = pd.read_excel('data\position_xz.xlsx',sheet_name=i)
     topo['x']=topo['x'].apply(lambda x: (((x%(x+1))*electrode_sep)-electrode_sep)).astype(float)
 
-    #guardar en una variable el número total de electrodos y el
-    #último valor de posición de un electrodo
+    #guardar en una variable el número total de electrodos 
     n = len(topo)
-    last_x = topo.at[topo.index[-1], 'x']
 
     #crear el header que requiere archivo con el formato UDF y convertir
     #el diccionario en un DataFrame
     header = [{n:'#x', '#number of electrodes':'z'}]
     header = pd.DataFrame(header)
 
-    #guardar el valor del último electrodo, sumarle la separación de electrodos,
-    #que en formato UDF marca el final del archivo de topografía
-    la_elec = last_x + electrode_sep
-
     #crear el "header" que marca el final de la topografía y el inicio
     #de los datos de resistividad, y convertir el dic en DF
-    middle = [{la_elec : '#a b m n u','#Number of data': 'rhoa sd i sp'}]
+    middle = [{data_number : '#a b m n u','#Number of data': 'rhoa sd i sp'}]
     middle = pd.DataFrame(middle)
 
     #crear el archivo de tomografía para cada iteración

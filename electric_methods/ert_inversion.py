@@ -3,7 +3,8 @@ from pygimli.physics import ert
 import matplotlib.pyplot as plt
 from matplotlib import colormaps
 
-data = ert.load('data\\tomo1.csv')
+data = ert.load('data\\tomo2.csv')
+print(data)
 ert.show(data)
 
 # fig, ax = plt.subplots()
