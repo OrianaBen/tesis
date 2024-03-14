@@ -8,3 +8,8 @@ venv
 electric_methods/data/position_data.xlsx
 electric_methods/data/electric_data.xlsx
 electric_methods/data/position_xz.xlsx
+electric_methods/resp.vec
+electric_methods/negResp.bms
+electric_methods/negResp-Atts.vector
+electric_methods/negResp.vtk
+electric_methods/respRez.vec

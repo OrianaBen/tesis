@@ -2,8 +2,9 @@ import pygimli as pg
 from pygimli.physics import ert
 import matplotlib.pyplot as plt
 from matplotlib import colormaps
+import numpy as np
 
-data = ert.load('data\\tomo3.csv')
+data = ert.load('data\\tomo0.csv')
 
 # fig, ax = plt.subplots()
 # ax.plot(pg.x(data), pg.z(data),'.')
@@ -17,10 +18,24 @@ data['k']=k_num
 # ert.show(data, vals=k_num/k_ana, label='Efecto de topografía',
 #          cMap="plasma",logscale=True)
 
-data['err'] = ert.estimateError(data, relativeError=0.01,absoluteError=10)
+data['err'] = ert.estimateError(data, relativeError=0.1,absoluteError=1.5)
 
 mgr = ert.ERTManager(data)
-mod = mgr.invert(data, lam=10, verbose = True,quality=34)
-#mgr.showResultAndFit()
+mod = mgr.invert(data, lam=0.1, verbose = True,quality=35)
+np.testing.assert_approx_equal(mgr.inv.chi2(), 1, significant=1)
 
-mgr.showResult(mod, cmap = 'coolwarm')
+mgr.showResultAndFit()
+plt.savefig('fit_and_model_tomo0.png')
+
+mgr.showResult(mod, cmap = 'rainbow', label="Resistividad ($\\Omega$ m)", 
+            xlabel = 'x (m)', ylabel = 'z (m)')
+
+plt.savefig('tomo0.png')
+
+#RRMSE: relative root-mean-square misfit, chi2: 
+#CHI2: chi-squared misfit (mean of squared error-weighted misfit).
+#rrmse debe estar entre 0 - 20% y chi2 cercano a 1
+#tomo 0 relative error 0.1 absolute error 1.5 lam 0.1 quality 35
+#tomo 1 relative error 0.05 absolute error 10 lam 2.5 quality 35
+#tomo 2 relative error 0.05 absolute error 10 lam 8 quality 35
+#tomo 3 relative error 0.05 absolute error 10 lam 3 quality 35

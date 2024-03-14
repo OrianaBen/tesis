@@ -28,8 +28,10 @@ for i in range(4):
     #leer archivo de topografía (con solo índice de electrodos y altura)
     #luego, convertir el valor de índice de electrodo a su posición relativa
     #a la separación de electrodos, comenzando en cero
+    #convertir la altura a profundidad
     topo = pd.read_excel('data\position_xz.xlsx',sheet_name=i)
     topo['x']=topo['x'].apply(lambda x: (((x%(x+1))*electrode_sep)-electrode_sep)).astype(float)
+    topo['z']=topo['z'] - topo['z'].max()
 
     #guardar en una variable el número total de electrodos 
     n = len(topo)
