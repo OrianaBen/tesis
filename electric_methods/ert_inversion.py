@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib import colormaps
 import numpy as np
 
-data = ert.load('data\\tomo0.csv')
+data = ert.load('data\\tomo2.csv')
 
 # fig, ax = plt.subplots()
 # ax.plot(pg.x(data), pg.z(data),'.')
@@ -18,19 +18,20 @@ data['k']=k_num
 # ert.show(data, vals=k_num/k_ana, label='Efecto de topografía',
 #          cMap="plasma",logscale=True)
 
-data['err'] = ert.estimateError(data, relativeError=0.1,absoluteError=1.5)
+data['err'] = ert.estimateError(data, relativeError=0.05,absoluteError=10)
 
 mgr = ert.ERTManager(data)
-mod = mgr.invert(data, lam=0.1, verbose = True,quality=35)
+mod = mgr.invert(data, lam=8, verbose = True,quality=33.5, 
+                 paraMaxCellSize = 1, paraBoundary=0)
 np.testing.assert_approx_equal(mgr.inv.chi2(), 1, significant=1)
 
-mgr.showResultAndFit()
-plt.savefig('fit_and_model_tomo0.png')
+# mgr.showResultAndFit()
+# plt.savefig('fit_and_model_tomo0.png')
 
 mgr.showResult(mod, cmap = 'rainbow', label="Resistividad ($\\Omega$ m)", 
             xlabel = 'x (m)', ylabel = 'z (m)')
 
-plt.savefig('tomo0.png')
+plt.savefig('tomo2_test.png')
 
 #RRMSE: relative root-mean-square misfit, chi2: 
 #CHI2: chi-squared misfit (mean of squared error-weighted misfit).
