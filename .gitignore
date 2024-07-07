@@ -13,3 +13,6 @@ electric_methods/negResp.bms
 electric_methods/negResp-Atts.vector
 electric_methods/negResp.vtk
 electric_methods/respRez.vec
+electric_methods/prepas_me/prepa1/electric_data _modified.xlsx
+electric_methods/prepas_me/prepa1/position_xz.xlsx
+*.html
